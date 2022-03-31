@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> <!--Para que ande el SweetAlert y cuando la capacidad maxima se lleno se vea mas bonito-->
+</head>
+<body>
+  <div class="jumbotron">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="card text-center">
+      <div style="font-size: 25px;" class="card-header">
+        Sucursal
+      </div>
+      <div  class="card-body">
+        <h5 style="font-size: 50px;" class="card-title">Frabega</h5>
+        <table style="margin-top: 40px;" class="table table-bordered table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Personas dentro del lugar </th>
+              <th scope="col">Maximo de personas </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%-data[0]-%></td>
+              <td><%-data[1]-%></td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">¡Bienvenido a Frabega!</h5>
+              <button onclick="entrar()" style="width: 150px; height: 100px;" type="button"  class="btn btn-primary">Entrada</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Gracias por su visita</h5>
+              <button onclick="salir()" style="width: 150px; height: 100px;" type="button" class="btn btn-primary">Salida</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      
+      <script>
+        function entrar() {
+          $.get("entrar", function (res) {
+            if (res) {
+              console.log(res);
+              location.reload();
+          }
+          else
+          {
+            swal("¡El local esta lleno!", "ven mas tarde", "error"); 
+          }
+
+        });
+        }
+        
+        function salir(){
+            $.get("salir",function (res) {
+              if (res) {
+              console.log(res);
+              location.reload();
+              }
+              else
+              {
+                swal("¡El local esta vacio!", "", "success"); 
+              }
+          });
+        }
+      </script>
+</body>
+</html>
